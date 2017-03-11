@@ -52,7 +52,7 @@ export async function sortByProximity(
   const distancesToDestination = await getDistancesToDestination(parkingData, destinationLat, destinationLon, departureTime, arrivalTime);
   return parkingData.map((parking, idx) => ({
     ...parking,
-    totalDuration: distancesToParkings[idx].duration.value + distancesToDestination[idx].value + (15 * 60),
+    totalDuration: distancesToParkings[idx].duration.value + distancesToDestination[idx].duration.value + (15 * 60),
   }))
   .sort((p1, p2) => (p1.distanceInfo.duration.value < p2.distanceInfo.duration.value ? -1 : 1));
 }
