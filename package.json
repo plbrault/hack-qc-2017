@@ -8,7 +8,6 @@
 		"lint": "eslint ."
 	},
 	"dependencies": {
-		"geojson-utils": "^1.1.0",
 		"react": "~15.4.1",
 		"react-native": "0.42.0",
 		"react-navigation": "^1.0.0-beta.6"
