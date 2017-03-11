@@ -1,0 +1,202 @@
+[
+ {
+   "NOM_STAT": "Angrignon",
+   "STAT_VELO": 91,
+   "STAT_REG": 733,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Beauharnois",
+   "STAT_VELO": 0,
+   "STAT_REG": 50,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Brossard-Chevrier",
+   "STAT_VELO": 74,
+   "STAT_REG": 2313,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 13,
+   "STAT_BORNE_ELECTRIQUE": 2
+ },
+ {
+   "NOM_STAT": "Cartier",
+   "STAT_VELO": 71,
+   "STAT_REG": 609,
+   "STAT_PAYANT": 127,
+   "STAT_COVOIT": 20,
+   "STAT_BORNE_ELECTRIQUE": 2
+ },
+ {
+   "NOM_STAT": "Chambly",
+   "STAT_VELO": 29,
+   "STAT_REG": 581,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 10,
+   "STAT_BORNE_ELECTRIQUE": 2
+ },
+ {
+   "NOM_STAT": "Chateauguay",
+   "STAT_VELO": 15,
+   "STAT_REG": 510,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 5,
+   "STAT_BORNE_ELECTRIQUE": 2
+ },
+ {
+   "NOM_STAT": "De Montarville",
+   "STAT_VELO": 35,
+   "STAT_REG": 307,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 2,
+   "STAT_BORNE_ELECTRIQUE": 2
+ },
+ {
+   "NOM_STAT": "Georges-Gagne",
+   "STAT_VELO": 31,
+   "STAT_REG": 432,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 2,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Halte-covoiturage Mirabel",
+   "STAT_VELO": 0,
+   "STAT_REG": 142,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "La Prairie",
+   "STAT_VELO": 30,
+   "STAT_REG": 553,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 10,
+   "STAT_BORNE_ELECTRIQUE": 2
+ },
+ {
+   "NOM_STAT": "Le Carrefour",
+   "STAT_VELO": 37,
+   "STAT_REG": 144,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 2,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Longueuil",
+   "STAT_VELO": 370,
+   "STAT_REG": 1770,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Mercier",
+   "STAT_VELO": 0,
+   "STAT_REG": 33,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Montcalm-Candiac",
+   "STAT_VELO": 45,
+   "STAT_REG": 291,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Montmorency ",
+   "STAT_VELO": 266,
+   "STAT_REG": 1327,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 39,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Namur",
+   "STAT_VELO": 19,
+   "STAT_REG": 425,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 6,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Brossard-Panama",
+   "STAT_VELO": 144,
+   "STAT_REG": 962,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 17,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Radisson",
+   "STAT_VELO": 30,
+   "STAT_REG": 534,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 103,
+   "STAT_BORNE_ELECTRIQUE": 3
+ },
+ {
+   "NOM_STAT": "Repentigny",
+   "STAT_VELO": 14,
+   "STAT_REG": 291,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 2,
+   "STAT_BORNE_ELECTRIQUE": 2
+ },
+ {
+   "NOM_STAT": "Seigneurial",
+   "STAT_VELO": 32,
+   "STAT_REG": 125,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Saint-Eustache",
+   "STAT_VELO": 29,
+   "STAT_REG": 20,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 2,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Sainte-Julie",
+   "STAT_VELO": 52,
+   "STAT_REG": 468,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 9,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Saint-Martin",
+   "STAT_VELO": 0,
+   "STAT_REG": 294,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 0,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Sherbrooke",
+   "STAT_VELO": 0,
+   "STAT_REG": 250,
+   "STAT_PAYANT": 0,
+   "STAT_COVOIT": 2,
+   "STAT_BORNE_ELECTRIQUE": 0
+ },
+ {
+   "NOM_STAT": "Terrebonne",
+   "STAT_VELO": 69,
+   "STAT_REG": 1388,
+   "STAT_PAYANT": 140,
+   "STAT_COVOIT": 10,
+   "STAT_BORNE_ELECTRIQUE": 2
+ }
+]
