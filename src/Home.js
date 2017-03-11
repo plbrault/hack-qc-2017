@@ -28,10 +28,9 @@ class Home extends Component {
         <Text style={styles.welcome}>
           Welcome to HackQc17!
         </Text>
-
         <View>
           <Button
-            onPress={() => navigate('Search')}
+            onPress={() => navigate('DataView')}
             title="Commencez l'aventure"
           />
         </View>
