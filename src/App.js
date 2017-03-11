@@ -1,14 +1,14 @@
 import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import Home from './Home';
+import Home from './components/Home';
+import Search from './components/Search/Search';
 import DataView from './components/DataView';
-import Search from './Search';
 
 const App = StackNavigator({
   Home: { screen: Home },
-  DataView: { screen: DataView },
   Search: { screen: Search },
+  DataView: { screen: DataView },
 });
 
 AppRegistry.registerComponent('HackQc17', () => App);
