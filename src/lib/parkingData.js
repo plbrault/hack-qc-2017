@@ -38,14 +38,13 @@ const parkings = metropolitanEquipmentData.features
     hasMetro: feature.properties.METRO === 1,
     lat: feature.properties.latitude,
     lon: feature.properties.longitude,
-    geojson: feature.properties.geometry,
+    geojson: feature.geometry,
     numPlaces: {
       total: (parkingCapacityByName[feature.properties.NOM] || {}).STAT_REG,
       withFee: (parkingCapacityByName[feature.properties.NOM] || {}).STAT_PAYANT,
       forCarpoolers: (parkingCapacityByName[feature.properties.NOM] || {}).STAT_COVOIT,
       withEVStation: (parkingCapacityByName[feature.properties.NOM] || {}).STAT_BORNE_ELECTRIQUE,
     },
-  }),
-);
+  }));
 
 export default parkings;

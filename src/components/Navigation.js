@@ -7,7 +7,7 @@ import {
   WebView,
 } from 'react-native';
 
-import navigationHTML from './lib/navigationHTML';
+import navigationHTML from './../lib/navigationHTML';
 
 const styles = StyleSheet.create({
   map: {

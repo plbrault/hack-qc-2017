@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,27 +12,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
 });
-
-class Search extends Component {
+class Results extends Component {
   static navigationOptions = {
-    title: 'Recherche',
+    title: 'Résultats',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Recherche et trouve
-        </Text>
+        <Text>{JSON.stringify(this.props.navigation.state.params)}</Text>
       </View>
     );
   }
 }
 
-export default Search;
+Results.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+};
+
+export default Results;
