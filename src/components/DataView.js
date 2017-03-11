@@ -4,6 +4,7 @@ import {
   Text,
 } from 'react-native';
 
+import moment from 'moment';
 import parkingData from '../lib/parkingData';
 import { sortByProximity } from '../lib/parkingSorter';
 
@@ -18,7 +19,7 @@ export default class DataView extends React.Component {
   }
 
   async fetchData() {
-    const parkings = await sortByProximity(parkingData, 45.421804, -71.963097);
+    const parkings = await sortByProximity(parkingData, 45.421804, -71.963097, moment().unix());
     this.setState({ parkings });
   }
 
