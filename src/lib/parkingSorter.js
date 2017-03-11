@@ -1,10 +1,16 @@
 import settings from '../settings.json';
 
 
-async function getDistancesToParkings(parkingData, currentLat, currentLon) {
-  const origin = `${currentLat},${currentLon}`;
+async function getDistancesToParkings(parkingData, originLat, originLon, departureTime) {
+  const origin = `${originLat},${originLon}`;
   const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
-  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&key=${settings.googleApiKey}`;
+
+  let url;
+  if (departureTime) {
+    url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&mode=driving&departure_time=${departureTime}&key=${settings.googleApiKey}`;
+  } else {
+    url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&mode=driving&key=${settings.googleApiKey}`;
+  }
 
   return fetch(url) // eslint-disable-line no-undef
     .then(response => response.json())
@@ -21,12 +27,22 @@ async function getDistancesToParkings(parkingData, currentLat, currentLon) {
  *  duration: { text: '1 hour 22 mins , value: 144290 },
  *  status: 'OK',
  * }
+ *
+ * @param [object[]] parkingData
+ * @param [number] currentLat
+ * @param [number] currentLon
+ * @param [number] destinationLat
+ * @param [number] destinationLon
+ * @param [?UnixTimestamp] departureTime
+ * @param [?UnixTimestamp] arrivalTime
  */
-export async function sortByProximity(parkingData, currentLat, currentLon, destination) {
-  const distances = await getDistancesToParkings(parkingData, currentLat, currentLon);
+export async function sortByProximity(
+  parkingData, originLat, originLon, destinationLat, destinationLon, departureTime, arrivalTime,
+) {
+  const distancesToParkings = await getDistancesToParkings(parkingData, originLat, originLon, departureTime);
   return parkingData.map((parking, idx) => ({
     ...parking,
-    distanceInfo: distances[idx],
+    distanceInfo: distancesToParkings[idx],
   }))
   .sort((p1, p2) => (p1.distanceInfo.duration.value < p2.distanceInfo.duration.value ? -1 : 1));
 }
