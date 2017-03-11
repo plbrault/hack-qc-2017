@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
+  Button,
   StyleSheet,
   Text,
   View,
@@ -19,20 +20,27 @@ const styles = StyleSheet.create({
   },
 });
 
-class Search extends Component {
-  static navigationOptions = {
-    title: 'Recherche',
-  };
-
+class Home extends Component {
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Recherche et trouve
+          Welcome to HackQc17!
         </Text>
+        <View>
+          <Button
+            onPress={() => navigate('Search')}
+            title="Commencez l'aventure"
+          />
+        </View>
       </View>
     );
   }
 }
 
-export default Search;
+Home.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+};
+
+export default Home;
