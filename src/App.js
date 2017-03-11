@@ -10,3 +10,5 @@ const App = StackNavigator({
 });
 
 AppRegistry.registerComponent('HackQc17', () => App);
+
+

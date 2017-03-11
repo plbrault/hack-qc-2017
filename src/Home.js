@@ -6,6 +6,8 @@ import {
   View,
 } from 'react-native';
 
+import { loadData } from './lib/parkingData';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -20,23 +22,35 @@ const styles = StyleSheet.create({
   },
 });
 
-const Home = (props) => {
-  const { navigate } = props.navigation;
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>
-        Welcome to HackQc17!
-      </Text>
+class Home extends React.Component {
+  componentWillMount() {
+    this.test();
+  }
 
-      <View>
-        <Button
-          onPress={() => navigate('Search')}
-          title="Commencez l'aventure"
-        />
+  async test() {
+    alert('allo jessy');
+    const data = await loadData();
+    alert(JSON.stringify(data));
+  }
+
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Welcome to HackQc17!
+        </Text>
+
+        <View>
+          <Button
+            onPress={() => navigate('Search')}
+            title="Commencez l'aventure"
+          />
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 Home.propTypes = {
   navigation: PropTypes.shape().isRequired,
