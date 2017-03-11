@@ -5,13 +5,9 @@ async function getDistances(parkingData, currentLat, currentLon) {
   const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&key=${settings.googleApiKey}`;
 
-  return new Promise((resolve, reject) => {
-    fetch(url)
-      .then(response => response.json())
-      .then(responseJson => responseJson.rows)
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
-  });
+  return fetch(url)
+    .then(response => response.json())
+    .then(responseJson => responseJson.rows[0].elements);
 }
 
 /**
@@ -36,7 +32,6 @@ async function getDistances(parkingData, currentLat, currentLon) {
  */
 export async function sortByProximity(parkingData, currentLat, currentLon) {
   const distances = await getDistances(parkingData, currentLat, currentLon);
-  alert(distances);
   return parkingData.map((parking, idx) => ({
     ...parking,
     distanceInfo: distances[idx],
