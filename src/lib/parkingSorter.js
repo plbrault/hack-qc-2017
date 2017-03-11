@@ -54,7 +54,7 @@ export async function sortByProximity(
     ...parking,
     totalDuration: distancesToDestination[idx].duration ? distancesToParkings[idx].duration.value + distancesToDestination[idx].duration.value + (15 * 60) : null,
   }))
-  .filter(parking => parking.totalDuration)
+  .filter(parking => parking.totalDuration !== null)
   .sort((p1, p2) => (p1.totalDuration < p2.totalDuration ? -1 : 1));
 }
 
