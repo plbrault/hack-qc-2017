@@ -5,7 +5,7 @@ async function getDistances(parkingData, currentLat, currentLon) {
   const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&key=${settings.googleApiKey}`;
 
-  return fetch(url)
+  return fetch(url) // eslint-disable-line no-undef
     .then(response => response.json())
     .then(responseJson => responseJson.rows[0].elements);
 }
