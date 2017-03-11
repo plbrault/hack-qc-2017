@@ -13,3 +13,8 @@ dependencies:
 test:
   override:
     - yarn lint
+
+general:
+  branches:
+    only:
+      - master
