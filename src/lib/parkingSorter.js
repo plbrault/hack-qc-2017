@@ -1,6 +1,7 @@
 import settings from '../settings.json';
 
-async function getDistances(parkingData, currentLat, currentLon) {
+
+async function getDistancesToParkings(parkingData, currentLat, currentLon) {
   const origin = `${currentLat},${currentLon}`;
   const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&key=${settings.googleApiKey}`;
@@ -11,7 +12,7 @@ async function getDistances(parkingData, currentLat, currentLon) {
 }
 
 /**
- * Return an array of parkings, sorted from the nearest to the farthest,
+ * Return an array of parkings, sorted from the shortest to longest total duration,
  * with an added `distanceInfo` attribute.
  *
  * `distanceInfo` example:
@@ -21,8 +22,8 @@ async function getDistances(parkingData, currentLat, currentLon) {
  *  status: 'OK',
  * }
  */
-export async function sortByProximity(parkingData, currentLat, currentLon) {
-  const distances = await getDistances(parkingData, currentLat, currentLon);
+export async function sortByProximity(parkingData, currentLat, currentLon, destination) {
+  const distances = await getDistancesToParkings(parkingData, currentLat, currentLon);
   return parkingData.map((parking, idx) => ({
     ...parking,
     distanceInfo: distances[idx],
