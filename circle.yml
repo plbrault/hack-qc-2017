@@ -1,0 +1,20 @@
+machine:
+  node:
+    version: 6.10
+
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.android
+    - ~/.gradle
+    - ~/.cache/yarn
+
+test:
+  override:
+    - yarn lint
+
+general:
+  branches:
+    only:
+      - master
