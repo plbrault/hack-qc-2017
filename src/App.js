@@ -7,8 +7,8 @@ import Results from './components/Results/Results';
 import DataView from './components/DataView';
 
 const App = StackNavigator({
-  Search: { screen: Search },
   Home: { screen: Home },
+  Search: { screen: Search },
   Results: { screen: Results },
   DataView: { screen: DataView },
 });
