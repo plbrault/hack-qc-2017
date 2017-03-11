@@ -13,11 +13,10 @@ class GeoFenceNotifier {
       } else {
         PushNotification.localNotification({
           /* iOS and Android properties */
-          largeIcon: 'ic_launcher', // (optional) default: "ic_launcher"
-          smallIcon: 'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher"
-          title: notificationTitle, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
-          message: notificationMessage, // (required)
-          actions: '["Poursuivre la navigation", "Annuler"]',
+          largeIcon: 'ic_launcher',
+          smallIcon: 'ic_notification',
+          title: notificationTitle,
+          message: notificationMessage,
         });
       }
     });
