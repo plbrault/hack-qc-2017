@@ -5,12 +5,27 @@ import {
 } from 'react-native';
 
 import parkingData from '../lib/parkingData';
+import { sortByProximity } from '../lib/parkingSorter';
 
 export default class DataView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { parkings: [] };
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  async fetchData() {
+    const parkings = await sortByProximity(parkingData, 45.421804, -71.963097);
+    this.setState({ parkings });
+  }
+
   render() {
     return (
       <ScrollView>
-        { parkingData.map(parking => <Text key={parking.name}>{JSON.stringify(parking)}</Text>) }
+        { this.state.parkings.map(parking => <Text key={parking.name}>{JSON.stringify(parking)}</Text>) }
       </ScrollView>
     );
   }
