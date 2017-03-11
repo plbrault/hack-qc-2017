@@ -30,7 +30,7 @@ const Home = (props) => {
 
       <View>
         <Button
-          onPress={() => navigate('Search')}
+          onPress={() => navigate('DataView')}
           title="Commencez l'aventure"
         />
       </View>
