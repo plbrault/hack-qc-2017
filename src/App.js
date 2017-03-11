@@ -6,9 +6,9 @@ import Search from './components/Search/Search';
 import DataView from './components/DataView';
 
 const App = StackNavigator({
+  DataView: { screen: DataView },
   Home: { screen: Home },
   Search: { screen: Search },
-  DataView: { screen: DataView },
 });
 
 AppRegistry.registerComponent('HackQc17', () => App);
