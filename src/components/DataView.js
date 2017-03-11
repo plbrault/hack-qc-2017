@@ -1,7 +1,7 @@
 import React from 'react';
 import {
+  ScrollView,
   Text,
-  View,
 } from 'react-native';
 
 import parkingData from '../lib/parkingData';
@@ -9,9 +9,9 @@ import parkingData from '../lib/parkingData';
 export default class DataView extends React.Component {
   render() {
     return (
-      <View>
-        <Text>{JSON.stringify(parkingData)}</Text>
-      </View>
+      <ScrollView>
+        { parkingData.map(parking => <Text key={parking.name}>{JSON.stringify(parking)}</Text>) }
+      </ScrollView>
     );
   }
 }

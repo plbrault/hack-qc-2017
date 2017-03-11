@@ -1,3 +1,26 @@
+/**
+ * Parking Data
+ *
+ * Format:
+ * [
+ *  {
+ *    name: <!STRING>,
+ *    hasTerminus: <!BOOLEAN>,
+ *    hasMetro: <!BOOLEAN>,
+ *    lat: <!NUMBER>,
+ *    lon: <!NUMBER>,
+ *    geojson: <!GeoJSON Point>,
+ *    numPlaces: {
+ *      total: <?NUMBER>,
+ *      withFee: <?NUMBER>,
+ *      forCarpoolers: <?NUMBER>,
+ *      withEVStation: <?NUMBER>,
+ *    }
+ *  },
+ *  ...
+ * ]
+ */
+
 import parkingCapacityData from '../data/amt-capacites-stationnementsincitatifs.json';
 import metropolitanEquipmentData from '../data/amt-equipementsmetropolitains.json';
 
