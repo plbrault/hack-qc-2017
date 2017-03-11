@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   Button,
   StyleSheet,
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Home = () => {
-  const { navigate } = this.props.navigation;
+const Home = (props) => {
+  const { navigate } = props.navigation;
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
@@ -30,12 +30,16 @@ const Home = () => {
 
       <View>
         <Button
-          onClick={() => navigate('Search')}
+          onPress={() => navigate('Search')}
           title="Commencez l'aventure"
         />
       </View>
     </View>
   );
+};
+
+Home.propTypes = {
+  navigation: PropTypes.shape().isRequired,
 };
 
 export default Home;
