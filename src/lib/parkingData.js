@@ -45,7 +45,7 @@ const parkings = metropolitanEquipmentData.features
       forCarpoolers: (parkingCapacityByName[feature.properties.NOM] || {}).STAT_COVOIT,
       withEVStation: (parkingCapacityByName[feature.properties.NOM] || {}).STAT_BORNE_ELECTRIQUE,
     },
-  }),
-);
+  }))
+  .filter(parking => parking.hasMetro || parking.hasTerminus);
 
 export default parkings;

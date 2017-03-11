@@ -16,27 +16,18 @@ async function getDistances(parkingData, currentLat, currentLon) {
  *
  * `distanceInfo` example:
  * {
- *  index: null,
- *  distance: '807 km',
- *  distanceValue: 807366,
- *  duration: '7 hours 30 mins',
- *  durationValue: 26981,
- *  origin: 'San Francisco, CA, USA',
- *  destination: 'San Diego, CA, USA',
- *  mode: 'driving',
- *  units: 'metric',
- *  language: 'en',
- *  avoid: null,
- *  sensor: false
- *}
+ *  distance: { text: '136 km', value: 135899 },
+ *  duration: { text: '1 hour 22 mins , value: 144290 },
+ *  status: 'OK',
+ * }
  */
 export async function sortByProximity(parkingData, currentLat, currentLon) {
   const distances = await getDistances(parkingData, currentLat, currentLon);
   return parkingData.map((parking, idx) => ({
     ...parking,
     distanceInfo: distances[idx],
-  }));
-  //.sort((p1, p2) => (p1.distanceInfo.durationValue < p2.distanceInfo.durationValue ? -1 : 1));*/
+  }))
+  .sort((p1, p2) => (p1.distanceInfo.duration.value < p2.distanceInfo.duration.value ? -1 : 1));
 }
 
 export default {
