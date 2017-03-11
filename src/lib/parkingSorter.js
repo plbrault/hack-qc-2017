@@ -1,33 +1,61 @@
 import settings from '../settings.json';
 
-async function getDistances(parkingData, currentLat, currentLon) {
-  const origin = `${currentLat},${currentLon}`;
-  const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
-  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&key=${settings.googleApiKey}`;
 
-  return fetch(url)
+async function getDistancesToParkings(parkingData, originLat, originLon, departureTime) {
+  const origin = `${originLat},${originLon}`;
+  const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
+
+  let url;
+  if (departureTime) {
+    url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&mode=driving&departure_time=${departureTime}&key=${settings.googleApiKey}`;
+  } else {
+    url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&mode=driving&key=${settings.googleApiKey}`;
+  }
+
+  return fetch(url) // eslint-disable-line no-undef
     .then(response => response.json())
     .then(responseJson => responseJson.rows[0].elements);
 }
 
+async function getDistancesToDestination(parkingData, destinationLat, destinationLon, departureTime, arrivalTime) {
+  const origins = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
+  const destination = `${destinationLat},${destinationLon}`;
+
+  let url;
+  if (departureTime) {
+    url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origins}&destinations=${destination}&mode=transit&departure_time=${departureTime}&key=${settings.googleApiKey}`;
+  } else {
+    url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origins}&destinations=${destination}&mode=transit&arrival_time=${arrivalTime}&key=${settings.googleApiKey}`;
+  }
+
+  return fetch(url) // eslint-disable-line no-undef
+    .then(response => response.json())
+    .then(responseJson => responseJson.rows.map(row => row.elements[0]));
+}
+
 /**
- * Return an array of parkings, sorted from the nearest to the farthest,
- * with an added `distanceInfo` attribute.
+ * Return an array of parkings, sorted from the shortest to longest total duration,
+ * with an added `totalDuration` (in seconds) attribute.
  *
- * `distanceInfo` example:
- * {
- *  distance: { text: '136 km', value: 135899 },
- *  duration: { text: '1 hour 22 mins , value: 144290 },
- *  status: 'OK',
- * }
+ * @param [object[]] parkingData
+ * @param [number] currentLat
+ * @param [number] currentLon
+ * @param [number] destinationLat
+ * @param [number] destinationLon
+ * @param [?UnixTimestamp] departureTime
+ * @param [?UnixTimestamp] arrivalTime
  */
-export async function sortByProximity(parkingData, currentLat, currentLon) {
-  const distances = await getDistances(parkingData, currentLat, currentLon);
+export async function sortByProximity(
+  parkingData, originLat, originLon, destinationLat, destinationLon, departureTime, arrivalTime,
+) {
+  const distancesToParkings = await getDistancesToParkings(parkingData, originLat, originLon, departureTime);
+  const distancesToDestination = await getDistancesToDestination(parkingData, destinationLat, destinationLon, departureTime, arrivalTime);
   return parkingData.map((parking, idx) => ({
     ...parking,
-    distanceInfo: distances[idx],
+    totalDuration: distancesToDestination[idx].duration ? distancesToParkings[idx].duration.value + distancesToDestination[idx].duration.value + (15 * 60) : null,
   }))
-  .sort((p1, p2) => (p1.distanceInfo.duration.value < p2.distanceInfo.duration.value ? -1 : 1));
+  .filter(parking => parking.totalDuration !== null)
+  .sort((p1, p2) => (p1.totalDuration < p2.totalDuration ? -1 : 1));
 }
 
 export default {
