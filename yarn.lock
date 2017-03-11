@@ -3438,6 +3438,10 @@ react-native-google-places-autocomplete@^1.2.8:
   dependencies:
     qs "^5.2.0"
 
+react-native-push-notification@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-2.2.1.tgz#9b392cee8f5223a1e1772c9a88c95742549fcfc3"
+
 react-native-tab-view@^0.0.56:
   version "0.0.56"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.56.tgz#7417a1f6502deef49abf58ba76a1cde213abbbf1"
