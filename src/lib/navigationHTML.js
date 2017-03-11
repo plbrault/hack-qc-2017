@@ -1,4 +1,4 @@
-import settings from '../src/settings.json';
+import settings from '../settings.json';
 
 const navigationHTML = `
 <!DOCTYPE html>
