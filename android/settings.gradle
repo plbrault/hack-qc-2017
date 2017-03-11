@@ -1,0 +1,3 @@
+rootProject.name = 'HackQc17'
+
+include ':app'
