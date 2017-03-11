@@ -30,7 +30,7 @@ class Home extends Component {
         </Text>
         <View>
           <Button
-            onPress={() => navigate('DataView')}
+            onPress={() => navigate('Search')}
             title="Commencez l'aventure"
           />
         </View>
