@@ -5,6 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import geoFence from './lib/geoFence';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,7 +31,15 @@ class Home extends Component {
         </Text>
         <View>
           <Button
-            onPress={() => navigate('DataView')}
+            onPress={() => {
+              geoFence.notififyNearLatLon(45.423938, -71.963404, 500, (err, success) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log('vous etes arriver');
+                }
+              });
+            }}
             title="Commencez l'aventure"
           />
         </View>
