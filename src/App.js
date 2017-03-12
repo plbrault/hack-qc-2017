@@ -7,7 +7,7 @@ import Search from './components/Search/Search';
 import Navigation from './components/Navigation';
 
 const App = StackNavigator({
-  Search: { screen: Search },  
+  Search: { screen: Search },
   Navigation: { screen: Navigation },
   DataView: { screen: DataView },
   Results: { screen: Results },
