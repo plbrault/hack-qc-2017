@@ -13,14 +13,6 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  list: {
-    flex: 1,
-  },
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
 });
 
 const props = {
@@ -49,13 +41,14 @@ class Navigation extends Component {
             .replace(/__ORIGIN_LNG__/, props.origin.lng)
             .replace(/__DESTINATION_LAT__/, props.destination.lat)
             .replace(/__DESTINATION_LNG__/, props.destination.lng);
+            // .replace(/__OPTIONS__/, {});
 
+    const test = '<p>Hello world!</p>';
     return (
       <View style={styles.map}>
         <WebView
-          scrollEnabled={false}
-          source={{ html }}
-          styles={styles.container}
+          source={{ html: html }}
+          style={styles.map}
         />
         <Button
           title={'Commencer'}
@@ -69,9 +62,9 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  origin: PropTypes.shape().isRequired,
-  destination: PropTypes.shape().isRequired,
-  parking: PropTypes.shape().isRequired,
+  // origin: PropTypes.shape().isRequired,
+  // destination: PropTypes.shape().isRequired,
+  // parking: PropTypes.shape().isRequired,
 };
 
 export default Navigation;

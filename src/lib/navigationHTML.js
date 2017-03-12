@@ -19,8 +19,9 @@ const navigationHTML = `
     <div id="map"></div>
     <script>
       function initMap() {
-        const parking = new google.maps.LatLng(__PARKING_LAT__, __PARKING_LNG__);
+        const options = {}; //__OPTIONS__;
         const origin = new google.maps.LatLng(__ORIGIN_LAT__, __ORIGIN_LNG__);
+        const parking = new google.maps.LatLng(__PARKING_LAT__, __PARKING_LNG__);
         const destination = new google.maps.LatLng(__DESTINATION_LAT__, __DESTINATION_LNG__);
         const driving = new google.maps.DirectionsRenderer();
         const transit = new google.maps.DirectionsRenderer();
@@ -30,20 +31,53 @@ const navigationHTML = `
             lng: __CENTER_LNG__,
           },
         });
-
+        const transitRequest = {
+          origin: parking,
+          destination,
+          travelMode: 'TRANSIT',
+          transitOptions: {},
+        };
+        const drivingRequest = {
+          origin,
+          destination: parking,
+          travelMode: 'DRIVING',
+        };
+  
         driving.setMap(map);
         transit.setMap(map);
 
-        calcRoute(origin, parking, 'DRIVING', driving);
-        calcRoute(parking, destination, 'TRANSIT',transit);
+        if (options.arriveBy) {
+          transitRequest.transitOptions.arrivalTime = options.arriveBy;
+
+          calcRoute(transitRequest, (transitDirections) => {
+            transit.setDirections(transitDirections);
+
+            calcRoute(drivingRequest, (drivingDirections) => {
+              // TODO: ajust arrival/departure data with offset of arrival time
+              driving.setDirections(drivingDirections);
+            });
+          });
+        } else {
+          calcRoute(drivingRequest, (drivingDirections) => {
+            driving.setDirections(drivingDirections);
+
+            // TODO: Set based on arrival + offset of departure time
+            transitRequest.transitOptions.departureTime = new Date();
+
+            calcRoute(transitRequest, (transitDirections) => {
+              transit.setDirections(transitDirections);
+            });
+          });
+        }
       }
 
-      function calcRoute(origin, destination, travelMode, directionsDisplay) {
+      function calcRoute(request, callback) {
         const directionsService = new google.maps.DirectionsService();
-        const request = { origin, destination, travelMode };
         directionsService.route(request, (result, status) => {
           if (status == 'OK') {
-            directionsDisplay.setDirections(result);
+            callback(result);
+          } else {
+            callback(null);
           }
         });
       }
