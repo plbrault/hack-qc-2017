@@ -84,14 +84,14 @@ class Search extends Component {
             listViewDisplayed="true"
             renderDescription={row => row.description}
             onPress={(data, details) => {
-              const newTo = {
-                to: {
+              const newFrom = {
+                from: {
                   address: data.description,
                   lat: details.geometry.location.lat,
                   lon: details.geometry.location.lng,
                 },
               };
-              this.setState(newTo);
+              this.setState(newFrom);
             }}
             getDefaultValue={() => ''}
             query={query}
@@ -101,7 +101,7 @@ class Search extends Component {
             styles={stylesFirstInput}
           />
 
-          {/* FROM */}
+          {/* TO */}
           <Text style={styles.secondLabel}>Destination</Text>
           <GooglePlacesAutocomplete
             placeholder="Entrer la destination"
@@ -111,14 +111,14 @@ class Search extends Component {
             listViewDisplayed="true"
             renderDescription={row => row.description}
             onPress={(data, details) => {
-              const newFrom = {
-                from: {
+              const newTo = {
+                to: {
                   address: data.description,
                   lat: details.geometry.location.lat,
                   lon: details.geometry.location.lng,
                 },
               };
-              this.setState(newFrom);
+              this.setState(newTo);
             }}
             getDefaultValue={() => ''}
             query={query}
