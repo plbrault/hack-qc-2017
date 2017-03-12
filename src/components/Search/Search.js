@@ -9,10 +9,11 @@ import {
 import moment from 'moment';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
+import settings from '../../settings.json';
 import { styles, stylesFirstInput, stylesSecondInput } from './styles';
 
 const query = {
-  key: 'AIzaSyDbK4tmqXXSHQlL5DPayc7vQv8wzLFFK1E',
+  key: settings.googleApiKey,
   language: 'fr',
 };
 
