@@ -1,5 +1,6 @@
 import settings from '../settings.json';
 
+// NOTE: DO NOT ADD Comments to variable
 const navigationHTML = `
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@ const navigationHTML = `
     <div id="map"></div>
     <script>
       function initMap() {
-        const options = {}; //__OPTIONS__;
+        const options = {};
         const origin = new google.maps.LatLng(__ORIGIN_LAT__, __ORIGIN_LNG__);
         const parking = new google.maps.LatLng(__PARKING_LAT__, __PARKING_LNG__);
         const destination = new google.maps.LatLng(__DESTINATION_LAT__, __DESTINATION_LNG__);
@@ -53,7 +54,6 @@ const navigationHTML = `
             transit.setDirections(transitDirections);
 
             calcRoute(drivingRequest, (drivingDirections) => {
-              // TODO: ajust arrival/departure data with offset of arrival time
               driving.setDirections(drivingDirections);
             });
           });
@@ -61,7 +61,6 @@ const navigationHTML = `
           calcRoute(drivingRequest, (drivingDirections) => {
             driving.setDirections(drivingDirections);
 
-            // TODO: Set based on arrival + offset of departure time
             transitRequest.transitOptions.departureTime = new Date();
 
             calcRoute(transitRequest, (transitDirections) => {

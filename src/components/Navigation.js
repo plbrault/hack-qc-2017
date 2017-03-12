@@ -40,14 +40,13 @@ class Navigation extends Component {
             .replace(/__ORIGIN_LAT__/, props.origin.lat)
             .replace(/__ORIGIN_LNG__/, props.origin.lng)
             .replace(/__DESTINATION_LAT__/, props.destination.lat)
-            .replace(/__DESTINATION_LNG__/, props.destination.lng);
-            // .replace(/__OPTIONS__/, {});
+            .replace(/__DESTINATION_LNG__/, props.destination.lng)
+            .replace(/__OPTIONS__/, {});
 
-    const test = '<p>Hello world!</p>';
     return (
       <View style={styles.map}>
         <WebView
-          source={{ html: html }}
+          source={{ html }}
           style={styles.map}
         />
         <Button
@@ -62,9 +61,9 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  // origin: PropTypes.shape().isRequired,
-  // destination: PropTypes.shape().isRequired,
-  // parking: PropTypes.shape().isRequired,
+  origin: PropTypes.shape().isRequired,
+  destination: PropTypes.shape().isRequired,
+  parking: PropTypes.shape().isRequired,
 };
 
 export default Navigation;
