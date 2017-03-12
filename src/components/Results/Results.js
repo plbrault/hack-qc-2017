@@ -154,6 +154,20 @@ class Results extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
+    const itinerary = {
+      origin: params.from,
+      destination: params.to,
+      navigation: {
+        navigate: this.props.navigation.navigate,
+      },
+    };
+
+    if (params.timeType === 'arrival') {
+      itinerary.arriveBy = params.unixTime;
+    } else {
+      itinerary.departAt = params.unixTime;
+    }
+
     // const params = {
     //   to: { address: '118 rue Milette, Magog, Québec' },
     //   from: { address: '118 rue Milette, Magog, Québec' },
@@ -186,7 +200,7 @@ class Results extends Component {
           <ListView
             dataSource={this.state.dataSource}
             renderRow={rowData => (
-              <Result {...rowData} />
+              <Result {...rowData} {...itinerary} />
             )}
           />
         </View>
