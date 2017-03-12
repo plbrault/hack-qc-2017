@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'moment';
 import {
   StyleSheet,
   Text,
@@ -24,11 +25,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
+  time: {
+    fontSize: 18,
+  },
+
   city: {
     fontSize: 18,
   },
 
   image: { width: 86, height: 39, marginRight: 20 },
+
+  clock: {
+    width: 20, height: 20, marginRight: 5,
+  },
 
   stats: {
     fontWeight: 'bold',
@@ -100,6 +109,23 @@ class Result extends Component {
             <Text style={styles.name}>
               {this.props.name}
             </Text>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 10,
+                marginTop: 20,
+              }}
+            >
+              <Image
+                style={styles.clock}
+                source={require('../../../assets/clock.png')}
+              />
+              <Text style={styles.time}>
+                {Moment('2017-01-01').startOf('day').seconds(this.props.totalDuration).format('H:mm')}
+              </Text>
+            </View>
           </View>
 
           <View
