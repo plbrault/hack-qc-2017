@@ -58,7 +58,7 @@ class Results extends Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      dataSource: ds.cloneWithRows([
+      /*dataSource: ds.cloneWithRows([
         {
           name: 'Brossard-Chevrier',
           city: 'Montréal',
@@ -131,8 +131,8 @@ class Results extends Component {
             withEVStation: 10,
           },
         },
-      ]),
-      parkings: [],
+      ]),*/
+      dataSource: ds,
     };
   }
 
@@ -141,14 +141,15 @@ class Results extends Component {
   }
 
   async fetchData() {
-    /*const parkings = await sortByProximity(
+    const parkings = await sortByProximity(
       parkingData,
       this.props.navigation.state.params.from.lat,
       this.props.navigation.state.params.from.lon,
       this.props.navigation.state.params.to.lat,
       this.props.navigation.state.params.to.lon,
     );
-    this.setState({ parkings });*/
+    const ds = this.state.dataSource;
+    this.setState({ dataSource: ds.cloneWithRows(parkings) });
   }
 
   render() {
@@ -167,7 +168,7 @@ class Results extends Component {
               DÉPART
             </Text>
             <Text style={styles.yellowLabel}>
-              {params.to.address.toUpperCase()}
+              {params.from.address.toUpperCase()}
             </Text>
           </View>
           <View style={styles.to}>
@@ -175,7 +176,7 @@ class Results extends Component {
               ARRIVÉE
             </Text>
             <Text style={styles.yellowLabel}>
-              {params.from.address.toUpperCase()}
+              {params.to.address.toUpperCase()}
             </Text>
           </View>
         </View>
