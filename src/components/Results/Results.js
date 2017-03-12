@@ -133,7 +133,6 @@ class Results extends Component {
         },
       ]),*/
       dataSource: ds,
-      parkings: [],
     };
   }
 
@@ -149,7 +148,8 @@ class Results extends Component {
       this.props.navigation.state.params.to.lat,
       this.props.navigation.state.params.to.lon,
     );
-    this.setState({ parkings });
+    const ds = this.state.dataSource;
+    this.setState({ dataSource: ds.cloneWithRows(parkings) });
   }
 
   render() {
