@@ -132,8 +132,8 @@ class Results extends Component {
           },
         },
       ]),
+      parkings: [],
     };
-    this.state = { parkings: [] };
   }
 
   componentDidMount() {
@@ -141,14 +141,14 @@ class Results extends Component {
   }
 
   async fetchData() {
-    const parkings = await sortByProximity(
+    /*const parkings = await sortByProximity(
       parkingData,
       this.props.navigation.state.params.from.lat,
       this.props.navigation.state.params.from.lon,
       this.props.navigation.state.params.to.lat,
       this.props.navigation.state.params.to.lon,
     );
-    this.setState({ parkings });
+    this.setState({ parkings });*/
   }
 
   render() {
