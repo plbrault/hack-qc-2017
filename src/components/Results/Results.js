@@ -143,8 +143,8 @@ class Results extends Component {
   async fetchData() {
     const parkings = await sortByProximity(
       parkingData,
-      this.props.navigation.state.params.from.address,
-      this.props.navigation.state.params.to.address,
+      this.props.navigation.state.params.from,
+      this.props.navigation.state.params.to,
     );
     const ds = this.state.dataSource;
     this.setState({ dataSource: ds.cloneWithRows(parkings) });
