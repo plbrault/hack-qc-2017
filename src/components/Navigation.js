@@ -32,6 +32,27 @@ const styles = StyleSheet.create({
 });
 
 class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      navigation: 'driving',
+    };
+
+    this.handleNavigation = this.handleNavigation.bind(this);
+  }
+
+  handleNavigation() {
+    const { parking } = this.props.navigation.state.params;
+
+    if (this.state.navigation === 'driving') {
+      this.setState({ navigation: 'transit' });
+      geoFenceNotifier.noticeMeWhenNear(parking.lat, parking.lon, 300, 'Vous êtes arrivés au stationnement', 'Continuez votre trajet avec nous');
+      Linking.openURL(`google.navigation:q=${parking.lat},${parking.lon}`);
+    } else {
+      Linking.openURL(`http://maps.google.com/maps?daddr=${parking.lat},${parking.lon}&dirflg=r`);
+    }
+  }
+
   render() {
     const {
       parking,
@@ -59,11 +80,8 @@ class Navigation extends Component {
         />
         <View style={styles.button}>
           <Button
-            title={'Navigation'}
-            onPress={() => {
-              geoFenceNotifier.noticeMeWhenNear(parking.lat, parking.lon, 300, 'Vous êtes arrivés au stationnement', 'Continuez votre trajet avec nous');
-              Linking.openURL(`google.navigation:q=${parking.lat},${parking.lon}`);
-            }}
+            title={this.state.navigation === 'driving' ? 'Navigation' : 'Navigation'}
+            onPress={this.handleNavigation}
           />
         </View>
       </View>
