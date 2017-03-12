@@ -74,7 +74,6 @@ class Search extends Component {
   }
 
   render() {
-    console.log(this.state); // eslint-disable-line
     const { navigate } = this.props.navigation;
     return (
       <View
@@ -147,7 +146,6 @@ class Search extends Component {
                   fontSize: 18,
                 }}
                 onChangeText={(text) => {
-                  console.log(text);
                   this.setState({ to: text });
                 }}
               />

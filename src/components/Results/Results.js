@@ -160,6 +160,8 @@ class Results extends Component {
       },
     };
 
+    console.log(itinerary);
+
     if (params.timeType === 'arrival') {
       itinerary.arriveBy = params.datetime;
     } else {

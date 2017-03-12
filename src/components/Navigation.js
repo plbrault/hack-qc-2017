@@ -66,13 +66,12 @@ class Navigation extends Component {
             .replace(/__CENTER_LNG__/, -72.0517597)
             .replace(/__PARKING_LAT__/, parking.lat)
             .replace(/__PARKING_LNG__/, parking.lon)
-            .replace(/__ORIGIN_LAT__/, origin.lat)
-            .replace(/__ORIGIN_LNG__/, origin.lon)
-            .replace(/__DESTINATION_LAT__/, destination.lat)
-            .replace(/__DESTINATION_LNG__/, destination.lon)
+            .replace(/__ORIGIN__/, origin)
+            .replace(/__DESTINATION__/, destination)
             .replace(/__ARRIVE_BY__/, arriveBy || '')
             .replace(/__DEPART_AT__/, departAt || '');
 
+    console.log(html);
     return (
       <View style={styles.map}>
         <WebView
