@@ -41,6 +41,7 @@ class Search extends Component {
       minute: new Date().getMinutes(),
       timeText: 'Maintenant',
       unixTime: moment().unix(),
+      datetime: moment().format(),
     };
   }
 
@@ -57,6 +58,7 @@ class Search extends Component {
         newState.hour = hour;
         newState.minute = minute;
         newState.unixTime = moment().hour(hour).minute(minute).unix();
+        newState.datetime = moment().hour(hour).minute(minute).format();
       } else if (action === TimePickerAndroid.dismissedAction) {
         newState.timeText = this.state.presetText;
       }
@@ -182,6 +184,7 @@ class Search extends Component {
                   from: this.state.from,
                   unixTime: this.state.unixTime,
                   timeType: this.state.timeType,
+                  datetime: this.state.datetime,
                 })}
                 title="Rechercher"
               />
