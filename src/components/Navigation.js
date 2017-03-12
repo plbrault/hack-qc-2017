@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import navigationHTML from './../lib/navigationHTML';
+import geoFenceNotifier from './../lib/geoFenceNotifier';
 
 const styles = StyleSheet.create({
   map: {
@@ -60,6 +61,7 @@ class Navigation extends Component {
           <Button
             title={'Navigation'}
             onPress={() => {
+              geoFenceNotifier.noticeMeWhenNear(parking.lat, parking.lon, 300, 'Vous êtes arrivés au stationnement', 'Continuez votre trajet avec nous');
               Linking.openURL(`google.navigation:q=${parking.lat},${parking.lon}`);
             }}
           />

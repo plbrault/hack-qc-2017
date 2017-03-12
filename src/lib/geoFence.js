@@ -34,7 +34,7 @@ class GeoFence {
   static getTimeoutFromDistance(distance) {
     const distanceKm = distance / 1000;
     if (distanceKm > 10) {
-      return 60000;
+      return 6000;
     }
     return 30000;
   }
