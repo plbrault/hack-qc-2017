@@ -19,7 +19,7 @@ export default class DataView extends React.Component {
   }
 
   async fetchData() {
-    const parkings = await sortByProximity(parkingData, 45.421804, -71.963097, 45.5126146, -73.5627659, moment().unix());
+    const parkings = await sortByProximity(parkingData, 45.421804, -71.963097, 45.5126146, -73.5627659);
     this.setState({ parkings });
   }
 
