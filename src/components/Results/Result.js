@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Moment from 'moment';
 import {
   StyleSheet,
   Text,
   View,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -23,11 +25,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
+  time: {
+    fontSize: 18,
+  },
+
   city: {
     fontSize: 18,
   },
 
   image: { width: 86, height: 39, marginRight: 20 },
+
+  clock: {
+    width: 20, height: 20, marginRight: 5,
+  },
 
   stats: {
     fontWeight: 'bold',
@@ -78,67 +88,100 @@ class Result extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
-      <View style={styles.container}>
-        <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10, alignItems: 'center' }} >
-          <Text style={styles.name}>
-            {this.props.name}
-          </Text>
-        </View>
+      <TouchableHighlight
+        style={styles.container}
+        onPress={() => navigate('Navigation', {
+          arriveBy: this.props.arriveBy,
+          departAt: this.props.departAt,
+          origin: this.props.origin,
+          destination: this.props.destination,
+          parking: {
+            lat: this.props.lat,
+            lon: this.props.lon,
+          },
+        })}
+      >
+        <View >
+          <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10, alignItems: 'center' }} >
+            <Text style={styles.name}>
+              {this.props.name}
+            </Text>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 10,
+                marginTop: 20,
+              }}
+            >
+              <Image
+                style={styles.clock}
+                source={require('../../../assets/clock.png')}
+              />
+              <Text style={styles.time}>
+                {Moment('2017-01-01').startOf('day').seconds(this.props.totalDuration).format('H:mm')}
+              </Text>
+            </View>
+          </View>
 
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginBottom: 10,
-            marginTop: 20,
-          }}
-        >
-          {this.renderMetro()}
-          {this.renderBus()}
-        </View>
-
-
-        <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10 }} >
           <View
             style={{
               flex: 1,
               flexDirection: 'row',
               justifyContent: 'space-around',
-              margin: 10,
+              marginBottom: 10,
               marginTop: 20,
             }}
           >
-            <View style={{ alignItems: 'center' }} >
-              <Text style={styles.label}>Stationnements</Text>
-              <Text style={styles.stats}>{this.props.numPlaces.total}</Text>
-            </View>
-            <View style={{ alignItems: 'center' }} >
-              <Text style={styles.label}>Places payantes</Text>
-              <Text style={styles.stats}>{this.props.numPlaces.withFee}</Text>
-            </View>
+            {this.renderMetro()}
+            {this.renderBus()}
           </View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              margin: 10,
-              marginTop: 0,
-            }}
-          >
-            <View style={{ alignItems: 'center' }} >
-              <Text style={styles.label}>Co-voiturage</Text>
-              <Text style={styles.stats}>{this.props.numPlaces.forCarpoolers}</Text>
+
+
+          <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10 }} >
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                margin: 10,
+                marginTop: 20,
+              }}
+            >
+              <View style={{ alignItems: 'center' }} >
+                <Text style={styles.label}>Stationnements</Text>
+                <Text style={styles.stats}>{this.props.numPlaces.total}</Text>
+              </View>
+              <View style={{ alignItems: 'center' }} >
+                <Text style={styles.label}>Places payantes</Text>
+                <Text style={styles.stats}>{this.props.numPlaces.withFee}</Text>
+              </View>
             </View>
-            <View style={{ alignItems: 'center' }} >
-              <Text style={styles.label}>Borne électrique</Text>
-              <Text style={styles.stats}>{this.props.numPlaces.withEVStation}</Text>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                margin: 10,
+                marginTop: 0,
+              }}
+            >
+              <View style={{ alignItems: 'center' }} >
+                <Text style={styles.label}>Co-voiturage</Text>
+                <Text style={styles.stats}>{this.props.numPlaces.forCarpoolers}</Text>
+              </View>
+              <View style={{ alignItems: 'center' }} >
+                <Text style={styles.label}>Borne électrique</Text>
+                <Text style={styles.stats}>{this.props.numPlaces.withEVStation}</Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </TouchableHighlight>
     );
   }
 }
