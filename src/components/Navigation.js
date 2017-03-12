@@ -15,33 +15,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const props = {
-  origin: {
-    lat: 45.2654426,
-    lng: -72.1515366,
-  },
-  parking: {
-    lat: 45.4109597,
-    lng: -71.9052587,
-  },
-  destination: {
-    lat: 45.4101637,
-    lng: -71.8880686,
-  },
-};
-
 class Navigation extends Component {
   render() {
+    const { parking, origin, destination, arriveBy, departAt } = this.props;
     const html = navigationHTML
             .replace(/__CENTER_LAT__/, 45.3618497)
             .replace(/__CENTER_LNG__/, -72.0517597)
-            .replace(/__PARKING_LAT__/, props.parking.lat)
-            .replace(/__PARKING_LNG__/, props.parking.lng)
-            .replace(/__ORIGIN_LAT__/, props.origin.lat)
-            .replace(/__ORIGIN_LNG__/, props.origin.lng)
-            .replace(/__DESTINATION_LAT__/, props.destination.lat)
-            .replace(/__DESTINATION_LNG__/, props.destination.lng)
-            .replace(/__OPTIONS__/, {});
+            .replace(/__PARKING_LAT__/, parking.lat)
+            .replace(/__PARKING_LNG__/, parking.lng)
+            .replace(/__ORIGIN_LAT__/, origin.lat)
+            .replace(/__ORIGIN_LNG__/, origin.lng)
+            .replace(/__DESTINATION_LAT__/, destination.lat)
+            .replace(/__DESTINATION_LNG__/, destination.lng)
+            .replace(/__ARRIVE_BY__/, arriveBy)
+            .replace(/__DEPART_AT__/, departAt);
 
     return (
       <View style={styles.map}>
@@ -50,9 +37,9 @@ class Navigation extends Component {
           style={styles.map}
         />
         <Button
-          title={'Commencer'}
+          title={'Navigation'}
           onPress={() => {
-            Linking.openURL(`google.navigation:q=${props.parking.lat},${props.parking.lng}`);
+            Linking.openURL(`google.navigation:q=${parking.lat},${parking.lng}`);
           }}
         />
       </View>
@@ -60,9 +47,16 @@ class Navigation extends Component {
   }
 }
 
+Navigation.defaultProps = {
+  arriveBy: '',
+  departAt: '',
+};
+
 Navigation.propTypes = {
-  origin: PropTypes.shape().isRequired,
+  arriveBy: PropTypes.string,
+  departAt: PropTypes.string,
   destination: PropTypes.shape().isRequired,
+  origin: PropTypes.shape().isRequired,
   parking: PropTypes.shape().isRequired,
 };
 

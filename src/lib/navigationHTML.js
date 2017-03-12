@@ -20,7 +20,8 @@ const navigationHTML = `
     <div id="map"></div>
     <script>
       function initMap() {
-        const options = {};
+        const arriveBy = '__ARRIVE_BY__';
+        const departAt = '__DEPART_AT__';
         const origin = new google.maps.LatLng(__ORIGIN_LAT__, __ORIGIN_LNG__);
         const parking = new google.maps.LatLng(__PARKING_LAT__, __PARKING_LNG__);
         const destination = new google.maps.LatLng(__DESTINATION_LAT__, __DESTINATION_LNG__);
@@ -47,8 +48,8 @@ const navigationHTML = `
         driving.setMap(map);
         transit.setMap(map);
 
-        if (options.arriveBy) {
-          transitRequest.transitOptions.arrivalTime = options.arriveBy;
+        if (arriveBy && arriveBy != '') {
+          transitRequest.transitOptions.arrivalTime = new Date(arriveBy);
 
           calcRoute(transitRequest, (transitDirections) => {
             transit.setDirections(transitDirections);
