@@ -28,7 +28,7 @@ function formatTime(hour, minute) {
 
 class Search extends Component {
   static navigationOptions = {
-    title: 'Recherche',
+    title: 'Entrer votre trajet',
     header: headerStyle,
   };
 
@@ -44,7 +44,6 @@ class Search extends Component {
       minute: new Date().getMinutes(),
       timeText: 'Maintenant',
       unixTime: moment().unix(),
-      datetime: moment().format(),
     };
   }
 
@@ -61,7 +60,6 @@ class Search extends Component {
         newState.hour = hour;
         newState.minute = minute;
         newState.unixTime = moment().hour(hour).minute(minute).unix();
-        newState.datetime = moment().hour(hour).minute(minute).format();
       } else if (action === TimePickerAndroid.dismissedAction) {
         newState.timeText = this.state.presetText;
       }
@@ -83,25 +81,11 @@ class Search extends Component {
         style={{
           flex: 1,
           backgroundColor: '#00c1de',
-          justifyContent: 'space-between',
+          justifyContent: 'space-around',
+          paddingTop: 20,
         }}
       >
-        <View
-          style={{
-            padding: 20,
-            // flex: 1,
-          }}
-        >
-          <Text
-            style={{
-              color: '#FFF',
-              fontWeight: 'bold',
-              fontSize: 20,
-            }}
-          >
-            ENTRER VOTRE TRAJET
-          </Text>
-        </View>
+
 
         <View
           style={{
@@ -169,6 +153,53 @@ class Search extends Component {
               />
             </View>
 
+            <View
+              style={{
+                flexDirection: 'row',
+              }}
+            >
+
+              <View style={{ flex: 1, paddingRight: 15 }}>
+                <Picker
+                  selectedValue={this.state.timeType}
+                  onValueChange={type => this.setState({ timeType: type })}
+                  style={{
+                    marginTop: 10,
+                    backgroundColor: '#f42534',
+                  }}
+                >
+                  <Picker.Item label="Départ" value="departure" />
+                  <Picker.Item label="Arrivée" value="arrival" />
+                </Picker>
+              </View>
+              <View style={{ flex: 1, paddingLeft: 15 }}>
+                <TouchableNativeFeedback
+                  onPress={this.showPicker}
+                  background={TouchableNativeFeedback.SelectableBackground()}
+                >
+                  <View
+                    style={{
+                      marginTop: 10,
+                      backgroundColor: '#d2d2d2',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: '#002d73',
+                        padding: 12,
+                        fontSize: 18,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {this.state.timeText}
+                    </Text>
+                  </View>
+                </TouchableNativeFeedback>
+              </View>
+
+            </View>
+
           </View>
         </View>
 
@@ -186,9 +217,9 @@ class Search extends Component {
                   from: this.state.from,
                   unixTime: this.state.unixTime,
                   timeType: this.state.timeType,
-                  datetime: this.state.datetime,
                 })}
-                background={TouchableNativeFeedback.SelectableBackground()}>
+                background={TouchableNativeFeedback.SelectableBackground()}
+              >
                 <View
                   style={{
                     backgroundColor: '#cfde00',
@@ -232,11 +263,8 @@ class Search extends Component {
 
         <View
           style={{
-            // flex: 4,
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: 20,
-            marginBottom: 20,
           }}
         >
           <Image
