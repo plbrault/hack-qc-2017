@@ -13,7 +13,7 @@ import settings from '../../settings.json';
 import { styles, stylesFirstInput, stylesSecondInput } from './styles';
 
 const query = {
-  key: settings.googleApiKey,
+  key: settings.autocompleteApiKey,
   language: 'fr',
 };
 

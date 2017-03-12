@@ -1,7 +1,8 @@
 import settings from '../settings.json';
 
-
 async function getDistancesToParkings(parkingData, originLat, originLon) {
+  //alert(settings.googleApiKey);
+
   const origin = `${originLat},${originLon}`;
   const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
 
