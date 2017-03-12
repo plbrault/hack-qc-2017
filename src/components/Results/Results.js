@@ -5,6 +5,9 @@ import {
   View,
 } from 'react-native';
 
+import parkingData from '../../lib/parkingData';
+import { sortByProximity } from '../../lib/parkingSorter';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,10 +21,30 @@ class Results extends Component {
     title: 'Résultats',
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { parkings: [] };
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  async fetchData() {
+    const parkings = await sortByProximity(
+      parkingData,
+      this.props.navigation.state.params.from.lat,
+      this.props.navigation.state.params.from.lon,
+      this.props.navigation.state.params.to.lat,
+      this.props.navigation.state.params.to.lon,
+    );
+    this.setState({ parkings });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(this.props.navigation.state.params)}</Text>
+        <Text>{JSON.stringify(this.state.parkings)}</Text>
       </View>
     );
   }
