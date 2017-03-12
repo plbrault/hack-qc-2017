@@ -44,7 +44,7 @@ class Results extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(this.props.navigation.state.params)}</Text>
+        <Text>{JSON.stringify(this.state.parkings)}</Text>
       </View>
     );
   }
