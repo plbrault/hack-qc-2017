@@ -1,6 +1,5 @@
 import settings from '../settings.json';
 
-
 async function getDistancesToParkings(parkingData, originLat, originLon) {
   const origin = `${originLat},${originLon}`;
   const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
@@ -40,12 +39,15 @@ export async function sortByProximity(
 ) {
   const distancesToParkings = await getDistancesToParkings(parkingData, originLat, originLon);
   const distancesToDestination = await getDistancesToDestination(parkingData, destinationLat, destinationLon);
-  return parkingData.map((parking, idx) => ({
+
+  const result = parkingData.map((parking, idx) => ({
     ...parking,
     totalDuration: distancesToDestination[idx].duration ? distancesToParkings[idx].duration.value + distancesToDestination[idx].duration.value + (15 * 60) : null,
   }))
   .filter(parking => parking.totalDuration !== null)
   .sort((p1, p2) => (p1.totalDuration < p2.totalDuration ? -1 : 1));
+
+  return result;
 }
 
 export default {

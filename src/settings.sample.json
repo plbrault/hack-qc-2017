@@ -1,3 +1,4 @@
 {
-  "googleApiKey": "INSERT API KEY HERE"
+  "autocompleteApiKey": "",
+  "googleApiKey": ""
 }
