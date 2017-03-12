@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import SplashScreen from 'react-native-splash-screen'
 
 import settings from '../../settings.json';
 import { styles, stylesFirstInput, stylesSecondInput } from './styles';
@@ -45,6 +46,12 @@ class Search extends Component {
       timeText: 'Maintenant',
       unixTime: moment().unix(),
     };
+  }
+
+  componentDidMount() {
+    // do anything while splash screen keeps, use await to wait for an async task.
+    SplashScreen.hide();
+    
   }
 
   showPicker = async () => {
