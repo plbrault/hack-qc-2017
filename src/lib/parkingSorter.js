@@ -39,7 +39,7 @@ export async function sortByProximity(
 ) {
   const distancesToParkings = await getDistancesToParkings(parkingData, originLat, originLon);
   const distancesToDestination = await getDistancesToDestination(parkingData, destinationLat, destinationLon);
-  
+
   const result = parkingData.map((parking, idx) => ({
     ...parking,
     totalDuration: distancesToDestination[idx].duration ? distancesToParkings[idx].duration.value + distancesToDestination[idx].duration.value + (15 * 60) : null,
