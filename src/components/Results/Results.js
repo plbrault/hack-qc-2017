@@ -8,6 +8,8 @@ import {
 
 import Result from './Result';
 import headerStyle from '../headerStyle';
+import parkingData from '../../lib/parkingData';
+import { sortByProximity } from '../../lib/parkingSorter';
 
 const styles = StyleSheet.create({
   container: {
@@ -131,6 +133,22 @@ class Results extends Component {
         },
       ]),
     };
+    this.state = { parkings: [] };
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  async fetchData() {
+    const parkings = await sortByProximity(
+      parkingData,
+      this.props.navigation.state.params.from.lat,
+      this.props.navigation.state.params.from.lon,
+      this.props.navigation.state.params.to.lat,
+      this.props.navigation.state.params.to.lon,
+    );
+    this.setState({ parkings });
   }
 
   render() {
