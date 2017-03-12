@@ -182,7 +182,7 @@ class Results extends Component {
               DÉPART
             </Text>
             <Text style={styles.yellowLabel}>
-              {params.to.address.toUpperCase()}
+              {params.from.address.toUpperCase()}
             </Text>
           </View>
           <View style={styles.to}>
@@ -190,7 +190,7 @@ class Results extends Component {
               ARRIVÉE
             </Text>
             <Text style={styles.yellowLabel}>
-              {params.from.address.toUpperCase()}
+              {params.to.address.toUpperCase()}
             </Text>
           </View>
         </View>

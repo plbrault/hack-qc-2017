@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 
-  image: { width: 86, height: 29, marginRight: 20 },
+  image: { width: 86, height: 39, marginRight: 20 },
 
   stats: {
     fontWeight: 'bold',
