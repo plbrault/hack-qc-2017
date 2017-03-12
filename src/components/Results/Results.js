@@ -161,9 +161,9 @@ class Results extends Component {
     };
 
     if (params.timeType === 'arrival') {
-      itinerary.arriveBy = params.unixTime;
+      itinerary.arriveBy = params.datetime;
     } else {
-      itinerary.departAt = params.unixTime;
+      itinerary.departAt = params.datetime;
     }
 
     // const params = {
