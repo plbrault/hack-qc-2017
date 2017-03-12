@@ -10,6 +10,7 @@ import moment from 'moment';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 import { styles, stylesFirstInput, stylesSecondInput } from './styles';
+import headerStyle from '../headerStyle';
 
 const query = {
   key: 'AIzaSyDbK4tmqXXSHQlL5DPayc7vQv8wzLFFK1E',
@@ -24,6 +25,7 @@ function formatTime(hour, minute) {
 class Search extends Component {
   static navigationOptions = {
     title: 'Recherche',
+    header: headerStyle,
   };
 
   constructor(props) {
