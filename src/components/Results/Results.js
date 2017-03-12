@@ -58,7 +58,7 @@ class Results extends Component {
 
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      dataSource: ds.cloneWithRows([
+      /*dataSource: ds.cloneWithRows([
         {
           name: 'Brossard-Chevrier',
           city: 'Montréal',
@@ -131,7 +131,8 @@ class Results extends Component {
             withEVStation: 10,
           },
         },
-      ]),
+      ]),*/
+      dataSource: ds,
       parkings: [],
     };
   }
@@ -141,14 +142,14 @@ class Results extends Component {
   }
 
   async fetchData() {
-    /*const parkings = await sortByProximity(
+    const parkings = await sortByProximity(
       parkingData,
       this.props.navigation.state.params.from.lat,
       this.props.navigation.state.params.from.lon,
       this.props.navigation.state.params.to.lat,
       this.props.navigation.state.params.to.lon,
     );
-    this.setState({ parkings });*/
+    this.setState({ parkings });
   }
 
   render() {
