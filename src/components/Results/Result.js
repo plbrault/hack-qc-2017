@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'moment';
 import {
   StyleSheet,
   Text,
@@ -21,6 +22,10 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 26,
     fontWeight: 'bold',
+  },
+
+  time: {
+    fontSize: 18,
   },
 
   city: {
@@ -83,6 +88,9 @@ class Result extends Component {
         <View style={{ flex: 1, paddingLeft: 10, paddingRight: 10, alignItems: 'center' }} >
           <Text style={styles.name}>
             {this.props.name}
+          </Text>
+          <Text style={styles.time}>
+            {Moment('2017-01-01').startOf('day').seconds(this.props.totalDuration).format('H:mm')}
           </Text>
         </View>
 
