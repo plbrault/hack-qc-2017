@@ -1,7 +1,6 @@
 import settings from '../settings.json';
 
-async function getDistancesToParkings(parkingData, originLat, originLon) {
-  const origin = `${originLat},${originLon}`;
+async function getDistancesToParkings(parkingData, origin) {
   const destinations = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
 
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destinations}&mode=driving&key=${settings.googleApiKey}`;
@@ -11,9 +10,8 @@ async function getDistancesToParkings(parkingData, originLat, originLon) {
     .then(responseJson => responseJson.rows[0].elements);
 }
 
-async function getDistancesToDestination(parkingData, destinationLat, destinationLon) {
+async function getDistancesToDestination(parkingData, destination) {
   const origins = parkingData.reduce((dest, parking) => `${dest}${parking.lat},${parking.lon}|`, '');
-  const destination = `${destinationLat},${destinationLon}`;
 
   const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origins}&destinations=${destination}&mode=transit&key=${settings.googleApiKey}`;
 
@@ -35,10 +33,10 @@ async function getDistancesToDestination(parkingData, destinationLat, destinatio
  * @param [?UnixTimestamp] arrivalTime
  */
 export async function sortByProximity(
-  parkingData, originLat, originLon, destinationLat, destinationLon,
+  parkingData, origin, destination,
 ) {
-  const distancesToParkings = await getDistancesToParkings(parkingData, originLat, originLon);
-  const distancesToDestination = await getDistancesToDestination(parkingData, destinationLat, destinationLon);
+  const distancesToParkings = await getDistancesToParkings(parkingData, origin);
+  const distancesToDestination = await getDistancesToDestination(parkingData, destination);
 
   const result = parkingData.map((parking, idx) => ({
     ...parking,
