@@ -42,14 +42,14 @@ class Navigation extends Component {
   }
 
   handleNavigation() {
-    const { parking } = this.props.navigation.state.params;
+    const { parking, destination } = this.props.navigation.state.params;
 
     if (this.state.navigation === 'driving') {
       this.setState({ navigation: 'transit' });
       geoFenceNotifier.noticeMeWhenNear(parking.lat, parking.lon, 300, 'Vous êtes arrivés au stationnement', 'Continuez votre trajet avec nous');
       Linking.openURL(`google.navigation:q=${parking.lat},${parking.lon}`);
     } else {
-      Linking.openURL(`http://maps.google.com/maps?daddr=${parking.lat},${parking.lon}&dirflg=r`);
+      Linking.openURL(`http://maps.google.com/maps?saddr=${parking.lat},${parking.lon}&daddr=${destination.lat},${destination.lon}&dirflg=r`);
     }
   }
 
@@ -80,7 +80,7 @@ class Navigation extends Component {
         />
         <View style={styles.button}>
           <Button
-            title={this.state.navigation === 'driving' ? 'Navigation' : 'Navigation'}
+            title={this.state.navigation === 'driving' ? 'Navigation' : 'Prochaine étape'}
             onPress={this.handleNavigation}
           />
         </View>
