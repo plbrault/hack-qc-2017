@@ -3,10 +3,13 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: '#00c1de',
   },
   inputAddress: {
-    margin: 15,
+    margin: 30,
+    padding: 30,
+    backgroundColor: '#FFF',
+    flex: 1,
   },
   firstLabel: {
     left: 0,
@@ -43,13 +46,10 @@ const inputBase = {
     marginLeft: 0,
     marginRight: 0,
     height: 50,
-    color: '#5d5d5d',
+    color: '#000',
     fontSize: 20,
-    backgroundColor: '#eee',
-  },
-  predefinedPlacesDescription: {
-    marginTop: -10,
-    padding: 0,
+    backgroundColor: '#d2d2d2',
+    borderRadius: 0,
   },
   listView: {
     backgroundColor: '#FFF',
@@ -64,9 +64,10 @@ export const stylesFirstInput = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 15,
-    zIndex: 2,
+    zIndex: 99,
   },
 });
+
 export const stylesSecondInput = StyleSheet.create({
   ...inputBase,
   container: {

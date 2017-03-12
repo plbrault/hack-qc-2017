@@ -5,6 +5,9 @@ import {
   TimePickerAndroid,
   View,
   Button,
+  TouchableNativeFeedback,
+  TextInput,
+  Image,
 } from 'react-native';
 import moment from 'moment';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -76,109 +79,108 @@ class Search extends Component {
     console.log(this.state); // eslint-disable-line
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <View style={styles.inputAddress}>
-          {/* FROM */}
-          <Text style={styles.firstLabel}>Départ</Text>
-          <GooglePlacesAutocomplete
-            placeholder="Entrer l'adresse de départ"
-            minLength={2}
-            autoFocus={false}
-            fetchDetails={true} // eslint-disable-line
-            listViewDisplayed="true"
-            renderDescription={row => row.description}
-            onPress={(data, details) => {
-              const newFrom = {
-                from: {
-                  address: data.description,
-                  lat: details.geometry.location.lat,
-                  lon: details.geometry.location.lng,
-                },
-              };
-              this.setState(newFrom);
-            }}
-            getDefaultValue={() => ''}
-            query={query}
-            currentLocation={false}
-            nearbyPlacesAPI="GooglePlacesSearch"
-            debounce={800}
-            styles={stylesFirstInput}
-          />
-
-          {/* TO */}
-          <Text style={styles.secondLabel}>Destination</Text>
-          <GooglePlacesAutocomplete
-            placeholder="Entrer la destination"
-            minLength={2}
-            autoFocus={false}
-            fetchDetails={true} // eslint-disable-line
-            listViewDisplayed="true"
-            renderDescription={row => row.description}
-            onPress={(data, details) => {
-              const newTo = {
-                to: {
-                  address: data.description,
-                  lat: details.geometry.location.lat,
-                  lon: details.geometry.location.lng,
-                },
-              };
-              this.setState(newTo);
-            }}
-            getDefaultValue={() => ''}
-            query={query}
-            currentLocation={false}
-            nearbyPlacesAPI="GooglePlacesSearch"
-            debounce={800}
-            styles={stylesSecondInput}
-          />
-        </View>
-
-        <Text style={styles.thirdLabel}>Heure</Text>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#00c1de',
+          justifyContent: 'space-between',
+        }}
+      >
         <View
           style={{
-            flexDirection: 'row',
-            position: 'absolute',
-            top: 175,
-            left: 0,
-            right: 0,
-            margin: 15,
-            paddingTop: 15,
-            alignItems: 'center',
+            padding: 20,
+            // flex: 1,
           }}
         >
-          <View style={{ flex: 1, paddingRight: 15 }}>
-            <Picker
-              selectedValue={this.state.timeType}
-              onValueChange={type => this.setState({ timeType: type })}
+          <Text
+            style={{
+              color: '#FFF',
+              fontWeight: 'bold',
+              fontSize: 20,
+            }}
+          >
+            ENTRER VOTRE TRAJET
+          </Text>
+        </View>
+
+        <View
+          style={{
+            // flex: 1,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: '#FFF',
+              margin: 20,
+              marginTop: 0,
+              padding: 20,
+            }}
+          >
+
+            <View
+              style={{
+                marginBottom: 15,
+              }}
             >
-              <Picker.Item label="Départ" value="departure" />
-              <Picker.Item label="Arrivée" value="arrival" />
-            </Picker>
-          </View>
-          <View style={{ flex: 1, paddingLeft: 15 }}>
-            <Button
-              onPress={this.showPicker}
-              title={this.state.timeText}
-              style={{}}
-            />
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                  paddingBottom: 10,
+                }}
+              >
+                DÉPART
+              </Text>
+              <TextInput
+                onChangeText={(text) => {
+                  this.setState({ from: text });
+                }}
+                style={{
+                  paddingRight: 10,
+                  fontSize: 18,
+                }}
+              />
+
+            </View>
+
+            <View
+              style={{
+
+              }}
+            >
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 18,
+                  paddingBottom: 10,
+                }}
+              >
+                ARRIVÉE
+              </Text>
+              <TextInput
+                style={{
+                  paddingRight: 10,
+                  fontSize: 18,
+                }}
+                onChangeText={(text) => {
+                  console.log(text);
+                  this.setState({ to: text });
+                }}
+              />
+            </View>
+
           </View>
         </View>
 
         <View
           style={{
-            flexDirection: 'row',
-            position: 'absolute',
-            top: 230,
-            left: 0,
-            right: 0,
-            margin: 15,
-            paddingTop: 15,
-            flex: 1,
+            padding: 20,
+            paddingTop: 0,
           }}
         >
           { this.buttonIsDisabled() ?
             (
-              <Button
+              <TouchableNativeFeedback
                 onPress={() => navigate('Results', {
                   to: this.state.to,
                   from: this.state.from,
@@ -186,13 +188,62 @@ class Search extends Component {
                   timeType: this.state.timeType,
                   datetime: this.state.datetime,
                 })}
-                title="Rechercher"
-              />
+                background={TouchableNativeFeedback.SelectableBackground()}>
+                <View
+                  style={{
+                    backgroundColor: '#cfde00',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: '#002d73',
+                      padding: 15,
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                      RECHERCHER
+                    </Text>
+                </View>
+              </TouchableNativeFeedback>
             ) : (
-              <Button disabled title="Rechercher" onPress={() => null} />
+              <View
+                style={{
+                  backgroundColor: '#cfde00',
+                  alignItems: 'center',
+                }}
+              >
+                <Text
+                  style={{
+                    color: 'grey',
+                    padding: 15,
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                  }}
+                >
+                    RECHERCHER
+                  </Text>
+              </View>
             )
           }
+
         </View>
+
+        <View
+          style={{
+            // flex: 4,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 20,
+            marginBottom: 20,
+          }}
+        >
+          <Image
+            source={require('../../../assets/image_recherche.png')}
+          />
+        </View>
+
       </View>
     );
   }
