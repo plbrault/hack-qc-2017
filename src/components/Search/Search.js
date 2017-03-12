@@ -11,9 +11,10 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 import settings from '../../settings.json';
 import { styles, stylesFirstInput, stylesSecondInput } from './styles';
+import headerStyle from '../headerStyle';
 
 const query = {
-  key: settings.googleApiKey,
+  key: settings.autocompleteApiKey,
   language: 'fr',
 };
 
@@ -25,6 +26,7 @@ function formatTime(hour, minute) {
 class Search extends Component {
   static navigationOptions = {
     title: 'Recherche',
+    header: headerStyle,
   };
 
   constructor(props) {
@@ -84,14 +86,14 @@ class Search extends Component {
             listViewDisplayed="true"
             renderDescription={row => row.description}
             onPress={(data, details) => {
-              const newTo = {
-                to: {
+              const newFrom = {
+                from: {
                   address: data.description,
                   lat: details.geometry.location.lat,
                   lon: details.geometry.location.lng,
                 },
               };
-              this.setState(newTo);
+              this.setState(newFrom);
             }}
             getDefaultValue={() => ''}
             query={query}
@@ -101,7 +103,7 @@ class Search extends Component {
             styles={stylesFirstInput}
           />
 
-          {/* FROM */}
+          {/* TO */}
           <Text style={styles.secondLabel}>Destination</Text>
           <GooglePlacesAutocomplete
             placeholder="Entrer la destination"
@@ -111,14 +113,14 @@ class Search extends Component {
             listViewDisplayed="true"
             renderDescription={row => row.description}
             onPress={(data, details) => {
-              const newFrom = {
-                from: {
+              const newTo = {
+                to: {
                   address: data.description,
                   lat: details.geometry.location.lat,
                   lon: details.geometry.location.lng,
                 },
               };
-              this.setState(newFrom);
+              this.setState(newTo);
             }}
             getDefaultValue={() => ''}
             query={query}
